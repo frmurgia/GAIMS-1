@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Gif to Barrier-grid animation: camera</title>
+
+        <link rel="stylesheet" href="camera.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
+
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+     
+  </head>
+
+  <body>
+
+    <div id="contenedor" style="width: 100%;"></div>
+
+    <nav>
+
+      <a href="#" id="hor" class="active setting" data-type="hor">
+        <img src="svg/arrows-h-light.svg" alt="hor">
+      </a>
+
+      <a href="#" id="ver" class="setting" data-type="ver">
+        <img src="svg/arrows-v-light.svg" alt="hor">
+      </a>
+      
+      <a href="#" id="gray" class="setting" data-type="gray">
+        <img src="svg/adjust-regular.svg" alt="hor">
+      </a>
+
+      <a href="#" id="frames" class="setting" data-type="frames">
+        <img src="svg/ruler-horizontal-light.svg" alt="info">
+      </a>
+
+      <a href="#"></a>
+
+      <a href="#" id="info"  data-type="info">
+        <img src="svg/question-circle-light.svg" alt="info">
+      </a>
+
+      <a href="#" id="close" data-type="close">
+        <img src="svg/times-light.svg" alt="info">
+      </a>
+
+      <aside id="slider_1">
+        <!--
+        <input type="range" min="1" max="8" value="2" class="slider" id="myRange" autocomplete="off">
+        -->
+      </aside>
+  
+      
+    </nav>
+
+    <article id="help">
+      <h6>istruzioni</h6>
+      <p>Mauris rutrum leo non vulputate sagittis. Vestibulum dapibus elit ut erat vulputate aliquet.</p>
+      <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+    </article>
+
+
+    <a href="#" id="settings" class="active">
+      <img src="svg/bars-light_w.svg" alt="settings">
+    </a>
+    
+    <script src="live_camera.js"></script>
+
+    <script>
+     
+     const buttons = document.querySelectorAll('.setting');
+     const btn_info = document.querySelector('#info');
+     const btn_settings = document.querySelector('#settings');
+     const btn_close = document.querySelector('#close');
+     const help_content = document.querySelector('#help');
+     const nav_pannel = document.querySelector('nav');
+     
+
+     
+
+      buttons.forEach(function(uiBtn) {
+        uiBtn.addEventListener('click',  (event) => {
+
+          event.preventDefault();
+          let my_slider = document.querySelector('#myRange');
+          my_slider.disabled = false;
+
+          changeSettings(uiBtn.dataset.type);
+
+            // active class
+          buttons.forEach(function(uiBtnlist) {
+            uiBtnlist.classList.remove("active");
+          });
+          uiBtn.classList.add("active");
+
+          if (help_content.classList.contains('active')) {
+            help_content.classList.remove("active");
+            btn_info.classList.remove("active");
+          } 
+
+        });
+      });
+
+      btn_settings.addEventListener('click',  (event) => {
+        event.preventDefault();
+        let my_slider = document.querySelector('#myRange');
+        
+        if (nav_pannel.classList.contains('active')) {
+          nav_pannel.classList.remove("active");
+          nav_pannel.classList.remove("active");
+
+          // if info is open
+          if (help_content.classList.contains('active')) {
+            buttons.forEach(function(uiBtnlist) {
+              uiBtnlist.classList.remove("active");
+              changeSettings('hor');
+              document.querySelector('#hor').classList.add("active");
+              document.querySelector('#info').classList.remove("active");
+              my_slider.disabled = false;
+            });
+          }
+
+          help_content.classList.remove("active");
+          
+        } else {
+          nav_pannel.classList.add("active");
+          nav_pannel.classList.add("active");
+        }
+
+      });
+
+      btn_close.addEventListener('click',  (event) => {
+        event.preventDefault();
+        let my_slider = document.querySelector('#myRange');
+        
+        if (nav_pannel.classList.contains('active')) {
+          nav_pannel.classList.remove("active");
+          nav_pannel.classList.remove("active");
+
+          // if info is open
+          if (help_content.classList.contains('active')) {
+            buttons.forEach(function(uiBtnlist) {
+              uiBtnlist.classList.remove("active");
+              changeSettings('hor');
+              document.querySelector('#hor').classList.add("active");
+              document.querySelector('#info').classList.remove("active");
+              my_slider.disabled = false;
+            });
+          }
+
+          help_content.classList.remove("active");
+          
+        } else {
+          nav_pannel.classList.add("active");
+          nav_pannel.classList.add("active");
+        }
+
+      });
+  
+
+      btn_info.addEventListener('click',  (event) => {
+        event.preventDefault();
+        let my_slider = document.querySelector('#myRange');
+        // active class
+        buttons.forEach(function(uiBtnlist) {
+          uiBtnlist.classList.remove("active");
+        });
+
+        if (help_content.classList.contains('active')) {
+
+          /*
+          help_content.classList.remove("active");
+          btn_info.classList.remove("active");
+          my_slider.disabled = false;
+          */
+
+        } else {
+          help_content.classList.add("active");
+          btn_info.classList.add("active");
+          my_slider.disabled = true;
+        }
+
+      });
+
+
+      
+    </script>
+  
+
+</body>
+
+</html>
